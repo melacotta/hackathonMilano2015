@@ -1,74 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <title>unquote</title>
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <!-- web components polyfill -->
+        <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+        <!-- Google Maps web component -->
+        <link rel="import" href="bower_components/google-map/google-map.html" />
+        <!-- shapefile parsing library -->
+        <script type="application/javascript" src="bower_components/shp/dist/shp.js"></script>
+        <!-- main -->
+        <script type="application/javascript" src="main.js"></script>
+        <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+        <link rel="import" href="bower_components/core-menu/core-menu.html">
+        <link rel="import" href="bower_components/core-item/core-item.html">
+        <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+        <link rel="import" href="bower_components/core-drawer-panel/core-drawer-panel.html">
+        <link rel="import" href="bower_components/core-icons/core-icons.html">
+        <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 
-  <script src="../components/webcomponentsjs/webcomponents.js"></script>
-  <link rel="import" href="../components/core-toolbar/core-toolbar.html">
-  <link rel="import" href="../components/core-menu/core-menu.html">
-  <link rel="import" href="../components/core-item/core-item.html">
-  <link rel="import" href="../components/core-header-panel/core-header-panel.html">
-  <link rel="import" href="../components/core-drawer-panel/core-drawer-panel.html">
-  <link rel="import" href="../components/core-icons/core-icons.html">
-  <link rel="import" href="../components/paper-icon-button/paper-icon-button.html">
- 
-  <style>
-	body {
-	  font-family: sans-serif;
-	}
-	core-header-panel {
-	  background: white;
-	}
-	core-toolbar {
-	  background-color: #03A9F4;
-	}
-	#navheader {
-	  background-color: #56BA89;
-	  
-	}
-	.content {
-	  padding: 20px;
-	}
-  </style>
-</head>
+        <style>
+            body {
+                font-family: sans-serif;
+            }
+            core-header-panel {
+                background: white;
+            }
+            core-toolbar {
+                background-color: #03A9F4;
+            }
+            #navheader {
+                background-color: #56BA89;
 
-<body unresolved>
-<script>
-	document.addEventListener('polymer-ready', function() {
-	  var navicon = document.getElementById('navicon');
-	  var drawerPanel = document.getElementById('drawerPanel');
-	  navicon.addEventListener('click', function() {
-		document.querySelector('core-drawer-panel').togglePanel();
-	  });
-	}); 
-</script>
+            }
+            .content {
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body unresolved>
+        <style>
+            google-map {
+                display: block;
+                height: 600px;
+            }
+        </style>
 
-<core-drawer-panel id="drawerPanel">
+        <script>
+            document.addEventListener('polymer-ready', function() {
+                var navicon = document.getElementById('navicon');
+                var drawerPanel = document.getElementById('drawerPanel');
+                navicon.addEventListener('click', function() {
+                    document.querySelector('core-drawer-panel').togglePanel();
+                });
+            });
+        </script>
 
-  <core-header-panel drawer>
-    <core-toolbar id="navheader">
-      <span>Liste ciclabili</span>
-    </core-toolbar>
-    <core-menu>
-      <core-item label="One"></core-item>
-      <core-item label="Two"></core-item>
-    </core-menu>
-   </core-header-panel>
+        <core-drawer-panel id="drawerPanel">
 
-  <core-header-panel main>
-    <core-toolbar id="mainheader">
-      <paper-icon-button 
-        id="navicon" icon="menu"></paper-icon-button>
-      <span flex>Title</span>
-    </core-toolbar>
-    <div class="content">
-      If drawer is hidden, press button to display drawer.
-    </div>
-  </core-header-panel>
+            <core-header-panel drawer>
+                <core-toolbar id="navheader">
+                    <span>Liste ciclabili</span>
+                </core-toolbar>
+                <core-menu>
+                    <core-item label="One"></core-item>
+                    <core-item label="Two"></core-item>
+                </core-menu>
+            </core-header-panel>
 
-</core-drawer-panel>
+            <core-header-panel main>
+                <core-toolbar id="mainheader">
+                    <paper-icon-button
+                            id="navicon" icon="menu"></paper-icon-button>
+                    <span flex>Title</span>
+                </core-toolbar>
+                <div class="content">
+                    <google-map id="my-map" latitude="45.464161" longitude="9.190336" zoom="13" library="places,geometry,drawing"></google-map>
+                </div>
+            </core-header-panel>
 
-</body>
-
+        </core-drawer-panel>
+    </body>
 </html>

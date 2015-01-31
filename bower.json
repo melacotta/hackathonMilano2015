@@ -15,6 +15,11 @@
   "dependencies": {
     "shp": "~3.1.5",
     "polymer": "Polymer/polymer#~0.5.4",
-    "google-map": "~0.4.0"
+    "google-map": "~0.4.0",
+    "core-elements": "Polymer/core-elements#~0.5.4",
+    "core-icons": "Polymer/core-icons#~0.5.4",
+    "core-icon": "Polymer/core-icon#~0.5.4",
+    "core-iconset": "Polymer/core-iconset#~0.5.4",
+    "paper-icon-button": "Polymer/paper-icon-button#~0.5.4"
   }
 }
