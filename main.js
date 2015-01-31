@@ -3,9 +3,11 @@
  */
 window.addEventListener('google-map-ready', function(event) {
 
-    console.log(event.target.map);
+    var polylines = [];
 
     shp("resources/CICLABILI/CICLABILI").then(function(ciclabili) {
+
+        console.log(ciclabili);
 
         var point;
 
@@ -27,6 +29,22 @@ window.addEventListener('google-map-ready', function(event) {
             });
 
             flightPath.setMap(event.target.map);
+            flightPath.setVisible(false);
+
+            polylines[ciclabili.features[i].properties.NOME_VIA] = flightPath;
+        }
+
+        console.log(polylines);
+    });
+
+    addEventListener('core-select', function(e) {
+        if (e.detail.isSelected) {
+
+            for (p in polylines) {
+                polylines[p].setVisible(false);
+            }
+
+            polylines[e.detail.item.label].setVisible(true);
         }
     });
 });
