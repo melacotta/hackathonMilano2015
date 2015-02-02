@@ -31,7 +31,11 @@ window.addEventListener('google-map-ready', function(event) {
             flightPath.setMap(event.target.map);
             flightPath.setVisible(false);
 
-            polylines[ciclabili.features[i].properties.NOME_VIA] = flightPath;
+            if (!polylines[ciclabili.features[i].properties.NOME_VIA]) {
+                polylines[ciclabili.features[i].properties.NOME_VIA] = [];
+            }
+            
+            polylines[ciclabili.features[i].properties.NOME_VIA].push(flightPath);
         }
 
         console.log(polylines);
@@ -40,11 +44,23 @@ window.addEventListener('google-map-ready', function(event) {
     addEventListener('core-select', function(e) {
         if (e.detail.isSelected) {
 
-            for (p in polylines) {
-                polylines[p].setVisible(false);
-            }
+            if (e.detail.item.label === 'TUTTE') {
+                for (p in polylines) {
+                    for (pezzo in polylines[p]) {
+                        polylines[p][pezzo].setVisible(true);
+                    }
+                }
+            } else {
+                for (p in polylines) {
+                    for (pezzo in polylines[p]) {
+                        polylines[p][pezzo].setVisible(false);
+                    }
+                }
 
-            polylines[e.detail.item.label].setVisible(true);
+                for (pezzo in polylines[e.detail.item.label]) {
+                    polylines[e.detail.item.label][pezzo].setVisible(true);
+                }
+            }
         }
     });
 });
